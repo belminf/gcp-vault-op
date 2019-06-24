@@ -1,0 +1,29 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: vault-to-etcd
+spec:
+  podSelector:
+    matchLabels:
+      app: etcd
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: vault
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: vaultop-to-vault
+spec:
+  podSelector:
+    matchLabels:
+      app: vault
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: vault-operator

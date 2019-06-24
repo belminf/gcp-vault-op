@@ -73,6 +73,28 @@ You need to do this for every node (3 in our example). Once you've unsealed all 
 ```
 kubectl get vault vault-example -o jsonpath='{.status.vaultStatus.sealed}'
 ```
+
+To test out the vault:
+```
+# In a shell you could keep open
+kubectl port-forward service/vault-example 8200
+
+# Use your root token
+export VAULT_TOKEN="11111111-aaaa-5555-8888-eeeeeeeeeeee"
+
+vault secrets list
+```
+
+## GCP Cloud KMS sealing
+Automated unsealing could be done with your cloud service's KMS.
+
+TODO
+
+## Switching to Consul
+Consul is the recommended storage backend for Vault.
+
+TODO
+
 ### Resources
 * [GCP Cloud KMS seal type doc](https://www.vaultproject.io/docs/configuration/seal/gcpckms.html)
 * [Hasicoprp Vault Guides](https://sourcegraph.com/github.com/hashicorp/vault-guides)
